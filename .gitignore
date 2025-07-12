@@ -1,0 +1,26 @@
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.env/
+.venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data files - optional (uncomment if you don’t want to track data)
+# *.csv
+# *.pkl
+# *.json
+
+# VSCode settings
+.vscode/
+
+# Model artifacts (optional if large)
+# *.pkl
