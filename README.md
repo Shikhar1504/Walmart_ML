@@ -32,18 +32,21 @@ Walmart/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Python 3.8+
 - Jupyter Notebook or JupyterLab (already installed in your environment)
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd Walmart
    ```
 
 2. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -59,12 +62,14 @@ Walmart/
 The model uses the following features from the product dataset:
 
 ### Core Product Features
+
 - `cost`: Product cost
 - `currentPrice`: Current selling price
 - `originalPrice`: Original product price
 - `margin`: Profit margin
 
 ### Inventory Features
+
 - `stock`: Current stock level
 - `maxStock`: Maximum stock capacity
 - `minStockLevel`: Minimum stock threshold
@@ -72,6 +77,7 @@ The model uses the following features from the product dataset:
 - `isPerishable`: Perishable product flag
 
 ### Price Factors
+
 - `priceFactors.expirationUrgency`: Expiration urgency factor
 - `priceFactors.stockLevel`: Stock level factor
 - `priceFactors.timeOfDay`: Time-based pricing factor
@@ -81,27 +87,33 @@ The model uses the following features from the product dataset:
 - `priceFactors.marketTrend`: Market trend factor
 
 ### Performance Metrics
+
 - `clearanceRate`: Product clearance rate
 - `wasteReduction`: Waste reduction percentage
 
 ## 🤖 Model Details
 
 ### Algorithm
+
 - **XGBoost Regressor** with optimized hyperparameters
 - **Parameters**: n_estimators=100, learning_rate=0.1, max_depth=4
 
 ### Feature Processing
+
 - **Missing Data**: Mean imputation using SimpleImputer
 - **Data Types**: Automatic conversion to numeric types
 - **Feature Selection**: 18 carefully selected features
 
 ### Performance Metrics
+
 - **MAE (Mean Absolute Error)**: ~450.89
 - **R² Score**: ~0.9957
 - **Cross-Validation**: 3-fold CV R² mean ~0.9212
 
 ### Confidence Scoring
+
 The model generates an `mlScore` (0.70-0.99) based on:
+
 1. Tree-level prediction variance across XGBoost ensemble
 2. Standard deviation of predictions
 3. Normalized confidence scaling
@@ -110,6 +122,7 @@ The model generates an `mlScore` (0.70-0.99) based on:
 ## 💻 Usage Examples
 
 ### Training the Model
+
 ```python
 import pandas as pd
 import xgboost as xgb
@@ -126,7 +139,7 @@ selected_features = [
     'cost', 'currentPrice', 'originalPrice', 'margin',
     'stock', 'maxStock', 'minStockLevel', 'daysUntilExpiry', 'isPerishable',
     'priceFactors.expirationUrgency', 'priceFactors.stockLevel', 'priceFactors.timeOfDay',
-    'priceFactors.demandForecast', 'priceFactors.competitorPrice', 
+    'priceFactors.demandForecast', 'priceFactors.competitorPrice',
     'priceFactors.seasonality', 'priceFactors.marketTrend',
     'clearanceRate', 'wasteReduction'
 ]
@@ -143,6 +156,7 @@ model.fit(X_imputed, y)
 ```
 
 ### Making Predictions
+
 ```python
 # Load saved model
 import joblib
@@ -166,6 +180,7 @@ print(f"Suggested Price: ${predicted_price:.2f}")
 ## ⚙️ Configuration
 
 ### Model Parameters
+
 ```python
 model_params = {
     'n_estimators': 100,      # Number of boosting rounds
@@ -176,6 +191,7 @@ model_params = {
 ```
 
 ### Confidence Score Parameters
+
 - **Base Score**: 0.70 (minimum confidence)
 - **Max Score**: 0.99 (maximum confidence)
 - **Power Transform**: 0.3 (score distribution)
@@ -183,6 +199,7 @@ model_params = {
 ## 📈 Output Files
 
 ### Predictions JSON
+
 ```json
 [
   {
@@ -194,6 +211,7 @@ model_params = {
 ```
 
 ### Model Files
+
 - `suggested_price_xgb_model_cleaned.pkl`: Trained XGBoost model
 - `imputer_cleaned.pkl`: Data imputation model
 - `confidence_scaler.pkl`: Confidence score scaler
@@ -216,4 +234,4 @@ For questions or support, please open an issue in the repository or contact the 
 
 ---
 
-**Note**: This model is designed for educational and research purposes. Always validate predictions in production environments and consider business constraints when implementing pricing strategies. 
+**Note**: This model is designed for educational and research purposes. Always validate predictions in production environments and consider business constraints when implementing pricing strategies.
